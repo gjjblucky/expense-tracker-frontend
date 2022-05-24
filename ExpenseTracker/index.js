@@ -10,7 +10,7 @@ function addNewExpense(e){
     }
     const token = localStorage.getItem('token');
     console.log(expenseDetails)
-    axios.post('http://localhost:3000/user/addexpense',expenseDetails, { headers: {"Authorization" : token} }).then((response) => {
+    axios.post('http://localhost:5000/user/addexpense',expenseDetails, { headers: {"Authorization" : token} }).then((response) => {
 
     if(response.status === 201){
         addNewExpensetoUI(response.data.expense);
@@ -24,7 +24,7 @@ function addNewExpense(e){
 
 window.addEventListener('load', ()=> {
     const token = localStorage.getItem('token');
-    axios.get('http://localhost:3000/user/getexpenses', { headers: {"Authorization" : token} }).then(response => {
+    axios.get('http://localhost:5000/user/getexpenses', { headers: {"Authorization" : token} }).then(response => {
         if(response.status === 200){
             response.data.expenses.forEach(expense => {
 
@@ -50,7 +50,7 @@ function addNewExpensetoUI(expense){
 
 function deleteExpense(e, expenseid) {
     const token = localStorage.getItem('token');
-    axios.delete(`http://localhost:3000/user/deleteexpense/${expenseid}`, { headers: {"Authorization" : token} }).then((response) => {
+    axios.delete(`http://localhost:5000/user/deleteexpense/${expenseid}`, { headers: {"Authorization" : token} }).then((response) => {
 
     if(response.status === 204){
             removeExpensefromUI(expenseid);
