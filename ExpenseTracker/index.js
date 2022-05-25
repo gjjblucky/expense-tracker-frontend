@@ -73,7 +73,7 @@ function removeExpensefromUI(expenseid){
 }
 document.getElementById('rzp-button1').onclick = async function (e) {
     const response  = await axios.get('http://localhost:5000/purchase/premiummembership', { headers: {"Authorization" : token} });
-    console.log(response);
+    console.log('clicked');
     var options =
     {
      "key": response.data.key_id, // Enter the Key ID generated from the Dashboard
