@@ -71,6 +71,27 @@ function removeExpensefromUI(expenseid){
     const expenseElemId = `expense-${expenseid}`;
     document.getElementById(expenseElemId).remove();
 }
+
+function download(){
+    axios.get('http://localhost:5000/user/download', { headers: {"Authorization" : token} })
+    .then((response) => {
+        if(response.status === 201){
+            //the bcakend is essentially sending a download link
+            //  which if we open in browser, the file would download
+            var a = document.createElement("a");
+            a.href = response.data.fileUrl;
+            a.download = 'myexpense.csv';
+            a.click();
+        } else {
+            throw new Error(response.data.message)
+        }
+
+    })
+    .catch((err) => {
+        showError(err)
+    });
+}
+
 document.getElementById('rzp-button1').onclick = async function (e) {
     const response  = await axios.get('http://localhost:5000/purchase/premiummembership', { headers: {"Authorization" : token} });
     console.log('clicked');
@@ -80,9 +101,9 @@ document.getElementById('rzp-button1').onclick = async function (e) {
      "name": "Test Company",
      "order_id": response.data.order.id, // For one time payment
      "prefill": {
-       "name": "Test User",
-       "email": "test.user@example.com",
-       "contact": "7003442036"
+       "name": "lucky rathoure",
+       "email": "pahadidon007@gmail.com.com",
+       "contact": "9877004938"
      },
      "theme": {
       "color": "#3399cc"
